@@ -1,10 +1,12 @@
 package alunegov.teamcity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
+import alunegov.telegram.TelegramWrapper;
 import jetbrains.buildServer.notification.NotificatorAdapter;
 import jetbrains.buildServer.notification.NotificatorRegistry;
 import jetbrains.buildServer.serverSide.SRunningBuild;
@@ -49,6 +51,17 @@ public class TelegramNotificator extends NotificatorAdapter {
             log.info("user: " + user.toString());
             log.info("telegramBotToken: " + user.getPropertyValue(telegramBotToken));
             log.info("telegramChat: " + user.getPropertyValue(telegramChat));
+        }
+
+        TelegramWrapper tw = new TelegramWrapper();
+        tw.setBotToken("");
+        tw.setChatId("");
+
+        try {
+            tw.send();
+        }
+        catch (IOException e) {
+            log.info(e.getMessage());
         }
     }
 

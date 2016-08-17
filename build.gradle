@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     compile files('libs/common-api.jar', 'libs/server-api.jar')
+    compile 'com.google.code.gson:gson:2.7'
 }
 
 task buildZip(dependsOn: 'jar' , type: Zip) {
