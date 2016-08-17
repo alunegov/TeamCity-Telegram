@@ -10,8 +10,6 @@ repositories {
 
 dependencies {
     compile files('libs/common-api.jar', 'libs/server-api.jar')
-    compile 'org.apache.logging.log4j:log4j-api:2.6.+'
-    compile 'org.apache.logging.log4j:log4j-core:2.6.+'
 }
 
 task buildZip(dependsOn: 'jar' , type: Zip) {
