@@ -1,0 +1,24 @@
+group 'alunegov.teamcity'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files('libs/common-api.jar', 'libs/server-api.jar')
+    compile 'org.apache.logging.log4j:log4j-api:2.6.+'
+    compile 'org.apache.logging.log4j:log4j-core:2.6.+'
+}
+
+task buildZip(dependsOn: 'jar' , type: Zip) {
+    from('.')
+    include('teamcity-plugin.xml')
+    into('server') {
+        from jar.outputs.files
+        include('*.jar')
+    }
+}
