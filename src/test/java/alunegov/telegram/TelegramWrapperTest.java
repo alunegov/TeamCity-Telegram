@@ -16,7 +16,7 @@ public class TelegramWrapperTest {
         tw.setChatId("");
 
         try {
-            tw.send("тест");
+            tw.send("С‚РµСЃС‚");
             Assert.assertTrue(true);
         } catch (IOException e) {
             e.printStackTrace();

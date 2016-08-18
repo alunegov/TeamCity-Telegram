@@ -4,6 +4,17 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'idea'
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+idea.project.ipr {
+    withXml { xmlProvider ->
+        def encoding = xmlProvider.asNode().component.find { it.@name == 'Encoding' }
+        encoding.appendNode('file', [url: 'PROJECT', charset: 'UTF-8'])
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -11,6 +22,7 @@ repositories {
 configurations {
     deploy
 }
+
 dependencies {
     compile files('libs/common-api.jar', 'libs/server-api.jar')
     compile 'com.google.code.gson:gson:2.7'
