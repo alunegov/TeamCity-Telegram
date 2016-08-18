@@ -31,9 +31,11 @@ public class TelegramNotificator extends NotificatorAdapter {
     private static final PropertyKey telegramChat = new NotificatorPropertyKey(notificatorType, telegramChatKey);
 
     private final NotificatorRegistry notificatorRegistry;
+    private final TelegramWrapper telegramWrapper;
 
-    public TelegramNotificator(NotificatorRegistry notificatorRegistry) {
+    public TelegramNotificator(NotificatorRegistry notificatorRegistry, TelegramWrapper telegramWrapper) {
         this.notificatorRegistry = notificatorRegistry;
+        this.telegramWrapper = telegramWrapper;
     }
 
     public void init() {
@@ -54,12 +56,11 @@ public class TelegramNotificator extends NotificatorAdapter {
             log.info("telegramChat: " + user.getPropertyValue(telegramChat));
         }
 
-        TelegramWrapper tw = new TelegramWrapper();
-        tw.setBotToken("");
-        tw.setChatId("");
+        telegramWrapper.setBotToken("");
+        telegramWrapper.setChatId("");
 
         try {
-            tw.send("тест");
+            telegramWrapper.send("тест");
         }
         catch (IOException e) {
             log.severe("TelegramNotificator FAILED");

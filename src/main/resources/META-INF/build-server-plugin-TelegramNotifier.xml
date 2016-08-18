@@ -3,4 +3,5 @@
 
 <beans default-autowire="constructor">
     <bean id="telegramNotificator" class="alunegov.teamcity.TelegramNotificator" init-method="init"/>
+    <bean id="telegramWrapper" class="alunegov.telegram.TelegramWrapper"/>
 </beans>
