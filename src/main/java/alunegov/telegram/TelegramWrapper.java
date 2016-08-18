@@ -59,7 +59,9 @@ public class TelegramWrapper {
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId)
-                .setText(messageText);
+                .setText(messageText)
+                .enableMarkdown(true)
+                .setDisableWebPagePreview(true);
 
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithModifiers(Modifier.STATIC, Modifier.FINAL)

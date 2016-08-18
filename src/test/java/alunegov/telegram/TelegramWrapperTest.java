@@ -16,7 +16,7 @@ public class TelegramWrapperTest {
         tw.setChatId("");
 
         try {
-            tw.send("тест");
+            tw.send("Build failed\n[error](http://teamcity.ros:8084/test)");
             Assert.assertTrue(true);
         } catch (IOException e) {
             e.printStackTrace();
