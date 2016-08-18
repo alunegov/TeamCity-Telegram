@@ -1,13 +1,11 @@
 package alunegov.telegram;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Modifier;
 import java.net.Proxy;
 import java.net.InetSocketAddress;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.logging.Logger;
 import javax.net.ssl.HttpsURLConnection;
 
@@ -27,7 +25,7 @@ public class TelegramWrapper {
 
     private String chatId;
 
-    public TelegramWrapper() {
+    TelegramWrapper() {
         this.botToken = null;
         this.chatId = null;
     }
@@ -67,10 +65,6 @@ public class TelegramWrapper {
                 .excludeFieldsWithModifiers(Modifier.STATIC, Modifier.FINAL)
                 .create();
         String msg = gson.toJson(sendMessage);
-        log.info(Arrays.toString(messageText.getBytes()));
-        log.info("sdafsadf тест");
-        log.info(sendMessage.getText());
-        log.info(msg);
 
         OutputStream out = conn.getOutputStream();
         out.write(msg.getBytes("UTF-8"));
