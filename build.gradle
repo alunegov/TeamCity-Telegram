@@ -8,16 +8,27 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    deploy
+}
 dependencies {
     compile files('libs/common-api.jar', 'libs/server-api.jar')
     compile 'com.google.code.gson:gson:2.7'
+
+    deploy 'com.google.code.gson:gson:2.7'
+
+    testCompile 'junit:junit:4.12'
 }
 
-task buildZip(dependsOn: 'jar' , type: Zip) {
+task buildZip(dependsOn: 'jar', type: Zip) {
     from('.')
     include('teamcity-plugin.xml')
+
     into('server') {
         from jar.outputs.files
+        include('*.jar')
+
+        from configurations.deploy
         include('*.jar')
     }
 }

@@ -2,6 +2,7 @@ package alunegov.teamcity;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -58,10 +59,12 @@ public class TelegramNotificator extends NotificatorAdapter {
         tw.setChatId("");
 
         try {
-            tw.send();
+            tw.send("тест");
         }
         catch (IOException e) {
-            log.info(e.getMessage());
+            log.severe("TelegramNotificator FAILED");
+            log.severe(Arrays.toString(e.getStackTrace()));
+            e.printStackTrace();
         }
     }
 
