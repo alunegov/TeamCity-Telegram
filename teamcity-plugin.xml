@@ -6,8 +6,10 @@
         <display-name>Telegram Notifier</display-name>
         <version>1.0-SNAPSHOT</version>
         <description>Post build notifications to Telegram</description>
+        <download-url>https://github.com/alunegov/TeamCity-Telegram</download-url>
         <vendor>
-            <name>alunegov</name>
+            <name>Alexander Lunegov</name>
+            <url>https://github.com/alunegov</url>
         </vendor>
     </info>
     <deployment use-separate-classloader="true" /> <!-- load server plugin's classes in separate classloader-->
