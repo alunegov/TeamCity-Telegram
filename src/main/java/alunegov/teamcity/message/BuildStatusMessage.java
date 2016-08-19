@@ -2,6 +2,7 @@ package alunegov.teamcity.message;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import jetbrains.buildServer.BuildProblemData;
 import jetbrains.buildServer.serverSide.SRunningBuild;
@@ -43,16 +44,14 @@ public class BuildStatusMessage {
         }
 
         UserSet<SUser> committers = build.getCommitters(SelectPrevBuildPolicy.SINCE_LAST_BUILD);
-        String committersStr = "";
         if (committers != null) {
-            for (SUser committer : committers.getUsers()) {
-                if (committer != null) {
-                    committersStr += committer.getUsername() + ", ";
-                }
+            String committersStr = committers.getUsers().stream()
+                    .filter(Objects::nonNull)
+                    .map(SUser::getUsername)
+                    .reduce((s1, s2) -> s1 + ", " + s2).orElse("");
+            if (!committersStr.isEmpty()) {
+                lines.add("Committers: `" + committersStr + "`");
             }
-        }
-        if (!committersStr.isEmpty()) {
-            lines.add("Committers: `" + committersStr + "`");
         }
 
         String text = lines.stream().reduce((s1, s2) -> s1 + "\n" + s2).orElse("_Oops, i'm nothing to say_");
