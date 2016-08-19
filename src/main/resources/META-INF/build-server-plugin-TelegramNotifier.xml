@@ -2,6 +2,6 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans default-autowire="constructor">
-    <bean id="telegramNotificator" class="alunegov.teamcity.TelegramNotificator" init-method="init"/>
+    <bean id="telegramServerAdapter" class="alunegov.teamcity.TelegramServerAdapter" init-method="init"/>
     <bean id="telegramWrapper" class="alunegov.telegram.TelegramWrapper"/>
 </beans>
