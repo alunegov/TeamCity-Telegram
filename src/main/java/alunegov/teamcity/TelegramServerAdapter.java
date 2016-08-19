@@ -46,20 +46,22 @@ public class TelegramServerAdapter extends BuildServerAdapter {
     public void serverShutdown() {
         super.serverShutdown();
 
-        postToTelegram(new Message("Server is shutting down"));
+        // TODO: Get watched events from project/admin settings
+        //postToTelegram(new Message("Server is shutting down"));
     }
 
     @Override
     public void serverStartup() {
         super.serverStartup();
 
-        postToTelegram(new Message("Server is started"));
+        // TODO: Get watched events from project/admin settings
+        //postToTelegram(new Message("Server is started"));
     }
 
     private void postToTelegram(@NotNull Message message) {
         // TODO: Get bot token and chat id from project/admin settings
-        telegramWrapper.setBotToken("");
-        telegramWrapper.setChatId("");
+        telegramWrapper.setBotToken("264613101:AAGVeKgork1d06EuE_Vy4jdF8kN_nbfaoS4");
+        telegramWrapper.setChatId("-121885192");
 
         try {
             telegramWrapper.send(message);
