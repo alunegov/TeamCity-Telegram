@@ -26,6 +26,7 @@ configurations {
 dependencies {
     compile files('libs/common-api.jar', 'libs/server-api.jar')
     compile 'com.google.code.gson:gson:2.7'
+    compile 'org.jetbrains:annotations:15.0'
 
     deploy 'com.google.code.gson:gson:2.7'
 
