@@ -9,13 +9,17 @@ import java.net.URL;
 import java.util.logging.Logger;
 import javax.net.ssl.HttpsURLConnection;
 
+import alunegov.teamcity.message.Message;
+import alunegov.teamcity.message.MessageFormat;
 import alunegov.telegram.botapi.methods.SendMessage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Alex on 17.08.2016.
  */
+
 public class TelegramWrapper {
     private static final Logger log = Logger.getLogger("TelegramWrapper");
 
@@ -46,9 +50,10 @@ public class TelegramWrapper {
         this.chatId = chatId;
     }
 
-    public void send(String messageText) throws IOException {
+    public void send(@NotNull Message message) throws IOException {
         URL url = new URL(BASE_URL + botToken + "/" + SendMessage.PATH);
 
+        // TODO: Don't use proxy here, it should be configured somehow in TeamCity
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.0.9", 8080));
 
         HttpsURLConnection conn = (HttpsURLConnection)url.openConnection(proxy);
@@ -59,9 +64,14 @@ public class TelegramWrapper {
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId)
-                .setText(messageText)
-                .enableMarkdown(true)
+                .setText(message.getText())
                 .setDisableWebPagePreview(true);
+        if (message.getFormat() == MessageFormat.Markdown) {
+            sendMessage.enableMarkdown(true);
+        }
+        else if (message.getFormat() == MessageFormat.Html) {
+            sendMessage.enableHtml(true);
+        }
 
         Gson gson = new GsonBuilder()
                 .excludeFieldsWithModifiers(Modifier.STATIC, Modifier.FINAL)
@@ -73,8 +83,10 @@ public class TelegramWrapper {
         out.flush();
         out.close();
 
-        log.info(String.valueOf(conn.getResponseCode()));
-        log.info(conn.getResponseMessage());
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            throw new IOException(String.format("Bad response (%d)", responseCode));
+        }
 
         conn.disconnect();
     }

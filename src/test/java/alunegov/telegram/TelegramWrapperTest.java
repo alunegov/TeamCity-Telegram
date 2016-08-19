@@ -1,5 +1,7 @@
 package alunegov.telegram;
 
+import alunegov.teamcity.message.Message;
+import alunegov.teamcity.message.MessageFormat;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +18,7 @@ public class TelegramWrapperTest {
         tw.setChatId("");
 
         try {
-            tw.send("Build failed\n[error](http://teamcity.ros:8084/test)");
+            tw.send(new Message("Build failed\n[error](http://teamcity.ros:8084/test)", MessageFormat.Markdown));
             Assert.assertTrue(true);
         } catch (IOException e) {
             e.printStackTrace();
