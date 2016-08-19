@@ -46,14 +46,16 @@ public class TelegramServerAdapter extends BuildServerAdapter {
     public void serverShutdown() {
         super.serverShutdown();
 
-        postToTelegram(new Message("Server is shutting down"));
+        // TODO: Get watched events from project/admin settings
+        //postToTelegram(new Message("Server is shutting down"));
     }
 
     @Override
     public void serverStartup() {
         super.serverStartup();
 
-        postToTelegram(new Message("Server is started"));
+        // TODO: Get watched events from project/admin settings
+        //postToTelegram(new Message("Server is started"));
     }
 
     private void postToTelegram(@NotNull Message message) {
