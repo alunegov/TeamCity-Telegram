@@ -60,8 +60,8 @@ public class TelegramServerAdapter extends BuildServerAdapter {
 
     private void postToTelegram(@NotNull Message message) {
         // TODO: Get bot token and chat id from project/admin settings
-        telegramWrapper.setBotToken("");
-        telegramWrapper.setChatId("");
+        telegramWrapper.setBotToken("264613101:AAGVeKgork1d06EuE_Vy4jdF8kN_nbfaoS4");
+        telegramWrapper.setChatId("-121885192");
 
         try {
             telegramWrapper.send(message);
