@@ -27,7 +27,7 @@ public class TelegramWrapper {
 
     private String chatId;
 
-    TelegramWrapper() {
+    public TelegramWrapper() {
         this.botToken = null;
         this.chatId = null;
     }
