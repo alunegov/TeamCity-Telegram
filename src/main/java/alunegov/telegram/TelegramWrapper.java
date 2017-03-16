@@ -3,8 +3,6 @@ package alunegov.telegram;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Modifier;
-import java.net.Proxy;
-import java.net.InetSocketAddress;
 import java.net.URL;
 import java.util.logging.Logger;
 import javax.net.ssl.HttpsURLConnection;
@@ -53,10 +51,10 @@ public class TelegramWrapper {
     public void send(@NotNull Message message) throws IOException {
         URL url = new URL(BASE_URL + botToken + "/" + SendMessage.PATH);
 
-        // TODO: Don't use proxy here, it should be configured somehow in TeamCity
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.0.9", 8080));
-
-        HttpsURLConnection conn = (HttpsURLConnection)url.openConnection(proxy);
+        // outgoing proxy (if needed) should be configured via JVM/TeamCity
+        // https://confluence.jetbrains.com/pages/viewpage.action?pageId=74845225#HowTo...-ConfigureTeamCitytoUseProxyServerforOutgoingConnections
+        // https://confluence.atlassian.com/jirakb/java-option-http-nonproxyhosts-does-not-work-214863640.html
+        HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
